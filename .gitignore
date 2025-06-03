@@ -168,5 +168,7 @@ staticfiles/
 staticfiles
 staticfiles_build/
 staticfiles_build
+!app/configwebpack/build/
 !configwebpack/build/
+!app/components/react/shared/lib/
 !components/react/shared/lib/
