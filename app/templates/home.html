@@ -1,14 +1,10 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <script>
-    
-    </script>
+    <script></script>
 {% endblock %}
 
 {% block content %}
-    <div class="flex flex-col items-center justify-center h-screen">
-        <p>Home Page</p>
-        Current route name: <strong>{{url_name}}</strong>
-    </div>
+    Current route name: <strong>{{url_name}}</strong>
+    <div id="rc-currentPage" data-current-page={{ url_name }}></div>
 {% endblock %}

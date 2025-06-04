@@ -37,7 +37,7 @@ class CustomTemplates(Jinja2Templates):
 
 templates = CustomTemplates(directory="app/templates")
 
-@router.get('/', name="home_page")
+@router.get('/', name="HomePage")
 async def get_home_page(request: Request):
     return templates.TemplateResponse(
         name='home.html',

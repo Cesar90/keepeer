@@ -1,0 +1,21 @@
+export enum ComponentRoot {
+    HOME = 'HomePage'
+    // INVOICECREATE = 'InvoiceCreatetView',
+    // INVOICEITEMS = 'InvoiceItemsView',
+    // INVOICEITEMSPDF = 'InvoicesItemsPDFListView',
+    // INVOICELIST = 'InvoiceListView',
+    // CONFIGTYPEOFJOBSUBCLIENT = 'ConfigTypeOfJobSubClientListView',
+    // CONFIGEMPLOYEE = 'ConfigEmployeeListView',
+    // PAYCORGENERATECSV = 'PaycorGenerateCSVListView',
+    // EMPLOYEES = 'EmployeeListView',
+    // CLIENTS = 'ClientListView',
+    // SUBCLIENTPARAMETERIZATION = 'ParameterSubClientView',
+    // REPORTSTANDARD = 'ReportStandardView',
+    // REPORTSUBCLIENTDETAIL = 'ReportSubClientDetailView',
+    // REPORTSUBCLIENTSUMMARY = 'ReportSubClientSummaryView',
+    // SUBCLIENTS = 'SubClientsView',
+    // REPORTINVOICESVSPAYROLL = 'ReportInvoicesVSPayrollView',
+    // ACCOUNTSRECEIVABLE = 'AccountsReceivableView',
+    // REPORTACCOUNTSRECEIVABLE = 'ReportAccountsReceivableView',
+    // EMPLOYEEHISTORY = 'ReportEmployeeHistoryView',
+}
