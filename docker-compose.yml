@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    container_name: fastapi_app
+    env_file: .env
+    command: /code/docker/app.sh
+    ports:
+      - "7777:8000"
+    volumes:
+      - ./app:/code/app  # Critical mount for hot-reload
+      - ./docker:/code/docker
+    environment:
+      - UVICORN_RELOAD=true
+      - UVICORN_WATCH_FILES_POLLING=1
+      - PYTHONUNBUFFERED=1
+      - WATCH_FORCE_POLLING=true
+      - WATCH_FILES_POLLING_INTERVAL=1000
+      - CHOKIDAR_USEPOLLING=true  # Additional Windows safeguard
+    restart: unless-stopped

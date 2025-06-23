@@ -1,37 +1,46 @@
-import time
 from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from app.core.exceptions import handler
+from app.core.middleware import (
+    cors_middleware,
+    gzip_middleware,
+    auth_middleware,
+    loggedin_middleware,
+    exception_middleware
+)
 from app.logger import logger
-from app.pages.router import router as router_pages
+
+# API
+from app.routers_api.api import api_router
+# Pages
+from app.routers_pages.page import page_router
 
 app = FastAPI()
-app.include_router(router_pages)
+cors_middleware.add(app)
+gzip_middleware.add(app)
 
-origins = [
-    "http://localhost:3000"
-]
+# we create the ASGI for the frontend
+frontend = FastAPI(openapi_url="")
+gzip_middleware.add(frontend)
+frontend.add_middleware(auth_middleware.AuthMiddleware)
+frontend.add_middleware(loggedin_middleware.LoggedinMiddleware)
+frontend.include_router(page_router)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS", "DELETE", "PATCH", "PUT"],
-    allow_headers=["Content-Type", "Set-Cookie", "Access-Control-Allow-Headers", 
-                   "Access-Control-Allow-Origin",
-                   "Authorization"],
+frontend.mount("/static", StaticFiles(directory="app/static"), "static")
+handler.hander_404_html(frontend)
+
+# we create the Web API framework
+api = FastAPI(
+    title="Keepeer",
+    description="Welcome to Keepeer's API documentation! Here you will able to discover all of the ways you can interact with the Keepeer API.",
+    root_path="/api",
+    docs_url=None,
+    openapi_url="/docs/openapi.json",
+    redoc_url="/docs",
 )
+gzip_middleware.add(api)
+api.add_middleware(exception_middleware.ExceptionMiddleware)
+api.include_router(api_router)
 
-app.mount("/static", StaticFiles(directory="app/static"), "static")
-
-@app.middleware("http")
-async def add_process_time_header(request: Request, call_next):
-    start_time = time.time()
-    response = await call_next(request)
-    process_time = time.time() - start_time
-    # response.headers["X-Process-Time"] = str(process_time)
-    # logger.info("Request execution time")
-    logger.info("Request handling time", extra={
-        "process_time": round(process_time, 4)
-    })
-    return response
+app.mount("/api", app=api)
+app.mount("/", app=frontend)

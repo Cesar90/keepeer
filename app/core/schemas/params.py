@@ -1,0 +1,9 @@
+from fastapi import Query
+from pydantic import BaseModel
+
+
+class CommonQueryParams(BaseModel):
+    page_size: int = Query(5, ge=1, description="Number of items per page")
+    page: int = Query(
+        1, ge=1, description="Page number. It is first, second etc. page?"
+    )
