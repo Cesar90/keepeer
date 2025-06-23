@@ -27,22 +27,24 @@ Keepeer is a modern, full-stack, containerized web application designed with sca
 
 ## 🗂 Project Structure
 
+<pre>
 my-app/
-├── requirements.txt # Python dependencies
-├── .gitignore # Git ignore rules
-├── .dockerignore # Docker ignore rules
-├── Dockerfile # Backend Dockerfile
-├── docker-compose.yml # Docker Compose configuration
+├── requirements.txt        # Python dependencies
+├── .gitignore              # Git ignore rules
+├── .dockerignore           # Docker ignore rules
+├── Dockerfile              # Backend Dockerfile
+├── docker-compose.yml      # Docker Compose configuration
 └── app/
-    ├── package.json # Frontend dependencies and scripts
-    ├── tsconfig.json # TypeScript configuration
-    ├── components/ # React components (TypeScript)
-    ├── main.py # FastAPI application entrypoint
-    ├── static/ # Static assets (served by FastAPI)
-    ├── templates/ # Jinja2 templates for server-rendered pages
-    ├── routers/ # FastAPI routers
-    ├── models/ # Pydantic & ORM models
-    └── utils/ # Utility and helper functions
+    ├── package.json        # Frontend dependencies and scripts
+    ├── tsconfig.json       # TypeScript configuration
+    ├── components/         # React components (TypeScript)
+    ├── main.py             # FastAPI application entrypoint
+    ├── static/             # Static assets (served by FastAPI)
+    ├── templates/          # Jinja2 templates for server-rendered pages
+    ├── routers/            # FastAPI routers
+    ├── models/             # Pydantic & ORM models
+    └── utils/              # Utility and helper functions
+</pre>
 
 ## Tech Stack
 
