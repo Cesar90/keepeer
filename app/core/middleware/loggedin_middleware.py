@@ -1,7 +1,6 @@
 import json
 from datetime import datetime, timezone
-from urllib.parse import quote, unquote
-from starlette.middleware.base import BaseHTTPMiddleware
+from urllib.parse import quote
 from starlette.responses import Response
 from jose import jwt, JWTError
 from app.config import settings

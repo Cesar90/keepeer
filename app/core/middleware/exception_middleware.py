@@ -48,8 +48,21 @@ class ExceptionMiddleware(BaseHTTPMiddleware):
         return response
     
     @classmethod
-    def get_exception_detail(self, e, filter):
-        return next(
-            (line for line in str(e.orig).split('\n') if line.strip().startswith(filter)),
-            None
-        )
+    def get_exception_detail(cls, e, filter: str):
+        # Use e.orig if available, otherwise fallback to e
+        orig = getattr(e, "orig", e)
+
+        try:
+            return next(
+                (line for line in str(orig).split('\n') if line.strip().startswith(filter)),
+                str(orig)
+            )
+        except Exception:
+            return str(e)
+    
+    # @classmethod
+    # def get_exception_detail(self, e, filter):
+    #     return next(
+    #         (line for line in str(e.orig).split('\n') if line.strip().startswith(filter)),
+    #         None
+    #     )

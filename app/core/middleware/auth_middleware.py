@@ -80,3 +80,52 @@ class AuthMiddleware(BaseHTTPMiddleware):
         if not user_id:
             # return RedirectResponse(url="/login", status_code=status.HTTP_303_SEE_OTHER)
             raise TokenExpiredExceptionCls()
+        
+
+    # async def get_current_user(self, request: Request):
+    #     # Extract the token from the request
+    #     token = self.get_token(request)
+
+    #     # Decode and validate the token
+    #     try:
+    #         payload = jwt.decode(
+    #             token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM]
+    #         )
+    #     except JWTError:
+    #         raise IncorrectTokenFormatExceptionCls
+
+    #     # Extract the expiration and user_id from the token
+    #     expire: str = payload.get("exp")
+    #     if not expire or int(expire) < int(datetime.now(timezone.utc).timestamp()):
+    #         raise TokenExpiredExceptionCls
+
+    #     user_id: str = payload.get("sub")
+    #     if not user_id:
+    #         raise UserIsNotPresentExceptionCls
+
+    #     # Fetch the user from the database
+    #     user = await UsersDAO.find_by_id(int(user_id))
+    #     if not user:
+    #         raise UserIsNotPresentExceptionCls
+
+    #     return user
+
+    # def get_token(self, request: Request):
+    #     # Get the token from the cookies
+    #     token = request.cookies.get("booking_access_token")
+    #     if not token:
+    #         raise TokenAbsentExceptionCls
+    #     return token
+
+    # def handle_auth_error(self, exception):
+    #     # Handle specific exceptions and return HTTP error responses
+    #     if isinstance(exception, TokenAbsentExceptionCls):
+    #         return RedirectResponse(url="/login", status_code=401)
+    #     elif isinstance(exception, TokenExpiredExceptionCls):
+    #         return RedirectResponse(url="/login", status_code=401)
+    #     elif isinstance(exception, IncorrectTokenFormatExceptionCls):
+    #         return RedirectResponse(url="/login", status_code=401)
+    #     elif isinstance(exception, UserIsNotPresentExceptionCls):
+    #         return RedirectResponse(url="/login", status_code=401)
+    #     else:
+    #         return RedirectResponse(url="/login", status_code=401)
