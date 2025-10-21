@@ -80,6 +80,47 @@ type testTestingFramework = [
     >
 ]
 
+/**
+ * It's important to understand the terminology around unions:
+ * 
+ * One of the type declarations below is a union
+ * One of the type declarations below is a discriminated union.
+ * One of the type declarations below is an enum
+ * 
+ * Which is which?
+*/
+
+// Discrimination union
+type A =
+    | {
+        type: "a";
+        whatever: string
+    }
+    | {
+        type: "b",
+        something: string
+    }
+    | {
+        type: "c",
+        whoCares: string
+    }
+
+const getUnion = (result: A) => {
+    if (result.type === "a") {
+        result.whatever
+    }
+}
+
+// B is a union
+type B = "a" | "b" | "c"
+
+// C is an enum.
+enum C {
+    A = "a",
+    B = "b",
+    C = "c"
+}
+
 const LoginPage = () => {
     return (
         <div
