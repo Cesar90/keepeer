@@ -145,6 +145,12 @@ type ClickEvent = Extract<Event, { type: "click" }>
 
 type testsClick = [Expect<Equal<ClickEvent, { type: "click"; event: MouseEvent }>>]
 
+type NoKeyDownEvents = Exclude<Event, { type: "keydown" }>
+
+type testsClickExclude = [Expect<Equal<NoKeyDownEvents,
+    { type: "click"; event: MouseEvent; }
+    | { type: "focus"; event: FocusEvent; }>>]
+
 const LoginPage = () => {
     return (
         <div
