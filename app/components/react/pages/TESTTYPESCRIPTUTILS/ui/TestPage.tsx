@@ -1,3 +1,5 @@
+import { KeyboardEvent } from "react";
+
 const myFunc = () => {
     return 'Hello';
 };
@@ -120,6 +122,28 @@ enum C {
     B = "b",
     C = "c"
 }
+
+export type Event =
+    | {
+        type: "click";
+        event: MouseEvent
+    }
+    | {
+        type: "focus";
+        event: FocusEvent;
+    }
+    | {
+        type: "keydown";
+        event: KeyboardEvent
+    };
+
+type Fruit = "apple" | "banana" | "orange";
+
+type BananaAndOrange = Extract<Fruit, "banana" | "orange">
+
+type ClickEvent = Extract<Event, { type: "click" }>
+
+type testsClick = [Expect<Equal<ClickEvent, { type: "click"; event: MouseEvent }>>]
 
 const LoginPage = () => {
     return (
