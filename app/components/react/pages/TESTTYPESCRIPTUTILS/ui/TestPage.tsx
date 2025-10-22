@@ -228,6 +228,18 @@ type testsIndividualProgram = [
     >>
 ]
 
+const frontendToBackEnumMap = {
+    singleModule: "SINGLE_MODULE",
+    multiModule: "MULTI_MODULE",
+    sharedModule: "SHARED_MODULE",
+} as const;
+
+type BackendModuleEnum = typeof frontendToBackEnumMap[keyof typeof frontendToBackEnumMap]
+
+type testFrontendToBackEnumMap = [
+    Expect<Equal<BackendModuleEnum, "SINGLE_MODULE" | "MULTI_MODULE" | "SHARED_MODULE">>
+]
+
 const LoginPage = () => {
     return (
         <div
