@@ -250,6 +250,19 @@ type testsFruits = [
     Expect<Equal<Fruit, "apple" | "banana" | "orange">>
 ]
 
+type RouteLiteral = `/${string}`
+
+export const goToRoute = (route: RouteLiteral) => { };
+
+// Should succeed
+goToRoute("/users");
+goToRoute("/")
+goToRoute("/admin/users")
+
+// Should error
+// @ts-expect-error
+goToRoute("users/1")
+
 const LoginPage = () => {
     return (
         <div
