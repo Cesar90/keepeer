@@ -240,6 +240,16 @@ type testFrontendToBackEnumMap = [
     Expect<Equal<BackendModuleEnum, "SINGLE_MODULE" | "MULTI_MODULE" | "SHARED_MODULE">>
 ]
 
+const fruits = ["apple", "banana", "orange"] as const;
+
+type AppleOrBanana = typeof fruits[0 | 1];
+type FruitFruits = typeof fruits[number]
+
+type testsFruits = [
+    Expect<Equal<AppleOrBanana, "apple" | "banana">>,
+    Expect<Equal<Fruit, "apple" | "banana" | "orange">>
+]
+
 const LoginPage = () => {
     return (
         <div
