@@ -151,6 +151,39 @@ type testsClickExclude = [Expect<Equal<NoKeyDownEvents,
     { type: "click"; event: MouseEvent; }
     | { type: "focus"; event: FocusEvent; }>>]
 
+const fakeDataDefaults = {
+    String: "Default string",
+    Int: 1,
+    Float: 1.14,
+    Boolean: true,
+    ID: "id",
+    obj: {
+        String: "Default string",
+    }
+}
+
+type Example = typeof fakeDataDefaults['obj']['String']
+
+type FakeDataDefaults = typeof fakeDataDefaults;
+
+type StringType = FakeDataDefaults['String']
+type IntType = FakeDataDefaults['Int']
+type FloatType = FakeDataDefaults['Float']
+type BooleanType = FakeDataDefaults['Boolean']
+type IDType = FakeDataDefaults['ID']
+
+type testFakeDataDefaults = [
+    Expect<Equal<StringType, string>>,
+    Expect<Equal<IntType, number>>,
+    Expect<Equal<FloatType, number>>,
+    Expect<Equal<BooleanType, boolean>>,
+    Expect<Equal<IDType, string>>,
+]
+
+type EventTypeIndex = Event["type"]
+
+type testsEventTypeIndex = [Expect<Equal<EventTypeIndex, "click" | "focus" | "keydown">>]
+
 const LoginPage = () => {
     return (
         <div
