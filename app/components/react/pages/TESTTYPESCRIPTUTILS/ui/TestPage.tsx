@@ -185,7 +185,7 @@ type EventTypeIndex = Event["type"]
 type testsEventTypeIndex = [Expect<Equal<EventTypeIndex, "click" | "focus" | "keydown">>]
 
 export const programModeEnumMap = {
-    Group: "group",
+    GROUP: "group",
     ANNOUNCEMENT: "announcement",
     ONE_ON_ONE: "1on1",
     SELF_DIRECTED: "selfDirected",
@@ -193,7 +193,7 @@ export const programModeEnumMap = {
     PLANNED_SELF_DIRECTED: "plannedSelfDirected"
 } as const
 
-export type GroupProgram = typeof programModeEnumMap["Group"]
+export type GroupProgram = typeof programModeEnumMap["GROUP"]
 export type AnnouncementProgram = typeof programModeEnumMap["ANNOUNCEMENT"]
 export type OneOnOneProgram = typeof programModeEnumMap["ONE_ON_ONE"]
 export type SelfDirectedProgram = typeof programModeEnumMap["SELF_DIRECTED"]
@@ -202,6 +202,30 @@ export type PlannedSelfDirectedProgram = typeof programModeEnumMap["PLANNED_SELF
 
 type testObjectConst = [
     Expect<Equal<GroupProgram, "group">>,
+]
+
+// export type IndividualProgram = typeof programModeEnumMap[
+//     | "ONE_ON_ONE"
+//     | "SELF_DIRECTED"
+//     | "PLANNED_ONE_ON_ONE"
+//     | "PLANNED_SELF_DIRECTED"
+// ]
+
+type ExmapleIndividualProgram = Exclude<
+    keyof typeof programModeEnumMap,
+    "GROUP" | "ANNOUNCEMENT"
+>
+
+export type IndividualProgram = typeof programModeEnumMap[ExmapleIndividualProgram]
+
+type testsIndividualProgram = [
+    Expect<Equal<
+        IndividualProgram,
+        "1on1" |
+        "selfDirected" |
+        "planned1on1" |
+        "plannedSelfDirected"
+    >>
 ]
 
 const LoginPage = () => {
