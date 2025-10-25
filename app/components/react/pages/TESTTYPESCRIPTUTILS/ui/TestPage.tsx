@@ -1,4 +1,5 @@
 import { KeyboardEvent } from "react";
+import { S } from 'ts-toolbelt'
 
 const myFunc = () => {
     return 'Hello';
@@ -288,6 +289,14 @@ type testSandwich = [
         | "white sandwich with ham"
         | "white sandwich with salami"
     >>
+]
+
+type Path = "Users/John/Documents/notes.txt"
+
+type SplitPath = S.Split<Path, "/">
+
+type testsPath = [
+    Expect<Equal<SplitPath, ["Users", "John", "Documents", "notes.txt"]>>
 ]
 
 const LoginPage = () => {
