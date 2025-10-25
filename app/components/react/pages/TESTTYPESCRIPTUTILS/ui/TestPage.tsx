@@ -263,6 +263,12 @@ goToRoute("/admin/users")
 // @ts-expect-error
 goToRoute("users/1")
 
+type Routes = "/users" | "/users/:id" | "/posts" | "/posts/:id";
+
+type DynamicRoutes = Extract<Routes, `${string}:${string}`>
+
+type testsDynamicRoutes = [Expect<Equal<DynamicRoutes, "/users/:id" | "/posts/:id">>]
+
 const LoginPage = () => {
     return (
         <div
