@@ -319,6 +319,18 @@ type testsObjectKeys = [
     >
 ]
 
+type EventUnion = `log_in` | "log_out" | "sign_up"
+
+type ObjectOfKeysEventUnion = Record<Uppercase<EventUnion>, string>
+
+type testsEventUnion = [
+    Expect<Equal<ObjectOfKeysEventUnion, {
+        LOG_IN: string;
+        LOG_OUT: string;
+        SIGN_UP: string
+    }>>
+]
+
 const LoginPage = () => {
     return (
         <div
