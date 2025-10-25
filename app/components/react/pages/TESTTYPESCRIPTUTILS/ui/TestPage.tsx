@@ -299,6 +299,26 @@ type testsPath = [
     Expect<Equal<SplitPath, ["Users", "John", "Documents", "notes.txt"]>>
 ]
 
+type TemplateLiteralKey = `${"user" | "post" | "comment"}${"Id" | "Name"}`
+
+type ObjectOfKeys = Record<TemplateLiteralKey, string>
+
+type testsObjectKeys = [
+    Expect<
+        Equal<
+            ObjectOfKeys,
+            {
+                userId: string;
+                userName: string;
+                postId: string;
+                postName: string;
+                commentId: string;
+                commentName: string;
+            }
+        >
+    >
+]
+
 const LoginPage = () => {
     return (
         <div
