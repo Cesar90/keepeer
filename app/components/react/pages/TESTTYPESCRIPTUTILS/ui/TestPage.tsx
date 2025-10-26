@@ -1,5 +1,6 @@
 import { KeyboardEvent } from "react";
 import { S } from 'ts-toolbelt'
+import { P } from "ts-toolbelt/out/Object/_api";
 
 const myFunc = () => {
     return 'Hello';
@@ -365,6 +366,19 @@ type testsMaybe = [
     Expect<Equal<Maybe<number>, number | null | undefined>>,
     Expect<Equal<Maybe<boolean>, boolean | null | undefined>>,
     Expect<Equal<Maybe<null>, null | undefined>>,
+]
+
+type AddRoutePrefix<TRoute extends string> = `/${TRoute}`
+
+type testsAddRoutePrefix = [
+    Expect<Equal<AddRoutePrefix<"">, "/">>,
+    Expect<Equal<AddRoutePrefix<"about">, "/about">>,
+    Expect<Equal<AddRoutePrefix<"about/team">, "/about/team">>,
+    Expect<Equal<AddRoutePrefix<"blog">, "/blog">>,
+    // @ts-expect-error
+    AddRoutePrefix<boolean>,
+    // @ts-expect-error
+    AddRoutePrefix<number>
 ]
 
 
