@@ -430,6 +430,25 @@ type testsGetParametersAndReturnType = [
     Expect<Equal<GetParametersAndReturnType<(n: number, b: boolean) => number>, { params: [number, boolean]; returnValue: number }>>,
 ]
 
+export type MaybeExclude<T extends {}> = T | null | undefined
+
+const whatever: {} = '123'
+
+type testsMaybeExclude = [
+    // @ts-expect-error
+    MaybeExclude<null>,
+    // @ts-expect-error
+    MaybeExclude<undefined>,
+    MaybeExclude<string>,
+    MaybeExclude<false>,
+    MaybeExclude<0>,
+    MaybeExclude<"">,
+    MaybeExclude<{
+        wow: true;
+    }>,
+]
+
+
 const LoginPage = () => {
     return (
         <div
