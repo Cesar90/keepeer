@@ -331,6 +331,22 @@ type testsEventUnion = [
     }>>
 ]
 
+export const TypePurchases = {
+    firstSelfHostLicensePurchase: "first_purchase",
+    renewalSelfHost: "renewal_self",
+    monthlySubscription: "monthly_subscription",
+    annualSubscription: "annual_subscription"
+} as const
+
+type TypePurchasesValueOF = ValueOf<typeof TypePurchases>
+
+export type MetadataGatherWireTransferKeys = `${ValueOf<typeof TypePurchases>}_alt_payment_method`
+
+export type CustomerMetadaGatherWireTransfer = Partial<
+    Record<MetadataGatherWireTransferKeys, string>
+>
+
+
 const LoginPage = () => {
     return (
         <div

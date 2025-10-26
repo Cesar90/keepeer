@@ -241,6 +241,8 @@ interface Window {
 
 type Expect<T extends true> = T;
 
+type ValueOf<T> = T[keyof T]
+
 type Equal<X, Y> = (<T>() => T extends X ? 1 : 2) extends <
     T,
 >() => T extends Y ? 1 : 2
