@@ -448,6 +448,20 @@ type testsMaybeExclude = [
     }>,
 ]
 
+// Rest Array can be as long you want or as short you want
+// First T works for ["a"]
+// ...Array<T> works for ["a", "b", "c"]
+type NonEmptyArray<T> = [T, ...Array<T>]
+
+export const makeEnum = (values: NonEmptyArray<string>) => { };
+
+makeEnum(["a"])
+makeEnum(["a", "b", "c"])
+
+// @ts-expect-error
+makeEnum([])
+
+
 
 const LoginPage = () => {
     return (
