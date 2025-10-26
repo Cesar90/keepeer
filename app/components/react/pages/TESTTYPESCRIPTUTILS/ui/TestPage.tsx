@@ -346,6 +346,16 @@ export type CustomerMetadaGatherWireTransfer = Partial<
     Record<MetadataGatherWireTransferKeys, string>
 >
 
+type ReturnWhatIPassIn<T> = T
+
+type testReturnWhatIPassIn = [
+    Expect<Equal<ReturnWhatIPassIn<1>, 1>>,
+    Expect<Equal<ReturnWhatIPassIn<"1">, "1">>,
+    Expect<Equal<ReturnWhatIPassIn<true>, true>>,
+    Expect<Equal<ReturnWhatIPassIn<false>, false>>,
+    Expect<Equal<ReturnWhatIPassIn<null>, null>>,
+]
+
 
 const LoginPage = () => {
     return (
