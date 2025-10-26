@@ -381,7 +381,9 @@ type testsAddRoutePrefix = [
     AddRoutePrefix<number>
 ]
 
-type CreateDataShape<TData, TError> = {
+type MaybeError = Error | undefined
+
+type CreateDataShape<TData, TError extends MaybeError = undefined> = {
     data: TData,
     error: TError
 }
@@ -408,7 +410,16 @@ type testsShapeError = [
             error: TypeError;
         }
     >>,
+    Expect<Equal<
+        CreateDataShape<string>,
+        {
+            data: string;
+            error: undefined;
+        }
+    >>
 ]
+
+
 
 const LoginPage = () => {
     return (
