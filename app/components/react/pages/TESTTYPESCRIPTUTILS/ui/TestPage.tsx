@@ -461,11 +461,17 @@ makeEnum(["a", "b", "c"])
 // @ts-expect-error
 makeEnum([])
 
-type YouSayGoodbyeAndISayHello<T> = T extends "hello" ? "goodbye" : "hello"
+// type YouSayGoodbyeAndISayHello<T> = T extends "hello" ? "goodbye" : "hello"
+type YouSayGoodbyeAndISayHello<T> = T extends "hello" | "goodbye"
+    ? T extends "hello"
+    ? "goodbye"
+    : "hello"
+    : never
 
 type testsYouSayGoodbyeAndISayHello = [
     Expect<Equal<YouSayGoodbyeAndISayHello<"hello">, "goodbye">>,
     Expect<Equal<YouSayGoodbyeAndISayHello<"goodbye">, "hello">>,
+    Expect<Equal<YouSayGoodbyeAndISayHello<"alright pal">, never>>,
 ]
 
 
