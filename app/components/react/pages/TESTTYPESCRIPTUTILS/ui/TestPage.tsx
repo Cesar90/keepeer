@@ -461,6 +461,12 @@ makeEnum(["a", "b", "c"])
 // @ts-expect-error
 makeEnum([])
 
+type YouSayGoodbyeAndISayHello<T> = T extends "hello" ? "goodbye" : "hello"
+
+type testsYouSayGoodbyeAndISayHello = [
+    Expect<Equal<YouSayGoodbyeAndISayHello<"hello">, "goodbye">>,
+    Expect<Equal<YouSayGoodbyeAndISayHello<"goodbye">, "hello">>,
+]
 
 
 const LoginPage = () => {
