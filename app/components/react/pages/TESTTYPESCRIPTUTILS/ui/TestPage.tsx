@@ -474,6 +474,14 @@ type testsYouSayGoodbyeAndISayHello = [
     Expect<Equal<YouSayGoodbyeAndISayHello<"alright pal">, never>>,
 ]
 
+// type GetDataValues<T> = T extends { data: any } ? T["data"] : never
+type GetDataValues<T> = T extends { data: infer TData } ? TData : never
+
+type testsGetDataValues = [
+    Expect<Equal<GetDataValues<{ data: "hello" }>, "hello">>,
+    Expect<Equal<GetDataValues<{ data: { name: "hello" } }>, { name: "hello" }>>,
+    Expect<Equal<GetDataValues<{ data: { name: "hello"; age: 20 } }>, { name: "hello"; age: 20 }>>,
+]
 
 const LoginPage = () => {
     return (
