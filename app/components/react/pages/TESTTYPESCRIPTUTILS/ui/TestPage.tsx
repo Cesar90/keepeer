@@ -356,6 +356,17 @@ type testReturnWhatIPassIn = [
     Expect<Equal<ReturnWhatIPassIn<null>, null>>,
 ]
 
+type Maybe<T> = T | null | undefined
+
+type ExampleMaybe = Maybe<string>
+
+type testsMaybe = [
+    Expect<Equal<Maybe<string>, string | null | undefined>>,
+    Expect<Equal<Maybe<number>, number | null | undefined>>,
+    Expect<Equal<Maybe<boolean>, boolean | null | undefined>>,
+    Expect<Equal<Maybe<null>, null | undefined>>,
+]
+
 
 const LoginPage = () => {
     return (
