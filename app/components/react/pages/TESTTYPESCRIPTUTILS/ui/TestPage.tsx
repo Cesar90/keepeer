@@ -528,6 +528,28 @@ type testsArrayOfNames = [
     Expect<Equal<GetSurname<ArrayOfNames[4]>, "King">>,
 ]
 
+const getServerSideProps = async () => {
+    const data = await fetch("https://jsonplaceholder.typicode.com/todos/1")
+    const json: { title: string } = await data.json()
+    return {
+        props: {
+            json,
+        },
+    };
+}
+
+type InferPropsFromServerSideFunctions<T> = T extends () => Promise<{ props: infer P }> ? P : never
+
+type PropsGetServerSideProps = InferPropsFromServerSideFunctions<typeof getServerSideProps>
+
+type testsInferPropsFromServerSideFunctions = [
+    Expect<
+        Equal<
+            InferPropsFromServerSideFunctions<typeof getServerSideProps>,
+            { json: { title: string } }
+        >
+    >
+]
 
 
 const LoginPage = () => {
