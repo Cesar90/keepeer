@@ -505,6 +505,29 @@ type Example2 = GetPoint<MyComplexInterface<1, 2, 3, 4>>
 
 type testsMyComplexInterface = [Expect<Equal<GetPoint<ExampleMyComplexInterface>, { x: 12, y: 14 }>>]
 
+type ArrayOfNames = [
+    "Matt Pocock",
+    "Jimi Hendrix",
+    "Eric Clapton",
+    "John Mayer",
+    "BB King"
+]
+
+/**
+ * This is an alternative way of doing it, using S.Split
+ */
+
+// type GetSurname<T extends string> = S.Split<T, " ">[1]
+type GetSurname<T> = T extends `${infer First} ${infer Last}` ? Last : never;
+
+type testsArrayOfNames = [
+    Expect<Equal<GetSurname<ArrayOfNames[0]>, "Pocock">>,
+    Expect<Equal<GetSurname<ArrayOfNames[1]>, "Hendrix">>,
+    Expect<Equal<GetSurname<ArrayOfNames[2]>, "Clapton">>,
+    Expect<Equal<GetSurname<ArrayOfNames[3]>, "Mayer">>,
+    Expect<Equal<GetSurname<ArrayOfNames[4]>, "King">>,
+]
+
 
 
 const LoginPage = () => {
