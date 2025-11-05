@@ -589,6 +589,21 @@ type testsGetParseResult = [
     Expect<Equal<GetParseResult<typeof parse3>, boolean>>,
 ]
 
+type FruitUnion = "apple" | "banana" | "orange"
+
+type GetAppleOrBanana<T> = T extends "apple" | "banana" ? T : never;
+
+// type AppleOrBananaInfer = FruitUnion extends infer T
+//     ? T extends "apple" | "banana"
+//     ? T
+//     : never
+//     : never;
+
+// type AppleOrBananaUnion = FruitUnionString extends "apple" | "bannana" ? FruitUnionString : never
+type AppleOrBananaUnion = GetAppleOrBanana<FruitUnion>
+
+type testsAppleOrBananaUnion = [Expect<Equal<AppleOrBananaUnion, "apple" | "banana">>]
+
 const LoginPage = () => {
     return (
         <div
