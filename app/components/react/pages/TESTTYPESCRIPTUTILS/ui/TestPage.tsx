@@ -551,6 +551,43 @@ type testsInferPropsFromServerSideFunctions = [
     >
 ]
 
+const parse1 = {
+    parse: () => 1
+}
+
+const parse2 = () => "123"
+
+const parse3 = {
+    extract: () => true
+}
+
+// type GetParseResult<T> = T extends {
+//     parse: () => infer TResult
+// } ? TResult
+//     : T extends () => infer TResult
+//     ? TResult
+//     : T extends {
+//         extract: () => infer TResult;
+//     }
+//     ? TResult
+//     : never;
+
+type GetParseResult<T> = T extends
+    | {
+        parse: () => infer TResult;
+    }
+    | {
+        extract: () => infer TResult;
+    }
+    | (() => infer TResult)
+    ? TResult
+    : never
+
+type testsGetParseResult = [
+    Expect<Equal<GetParseResult<typeof parse1>, number>>,
+    Expect<Equal<GetParseResult<typeof parse2>, string>>,
+    Expect<Equal<GetParseResult<typeof parse3>, boolean>>,
+]
 
 const LoginPage = () => {
     return (
