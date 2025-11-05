@@ -604,6 +604,39 @@ type AppleOrBananaUnion = GetAppleOrBanana<FruitUnion>
 
 type testsAppleOrBananaUnion = [Expect<Equal<AppleOrBananaUnion, "apple" | "banana">>]
 
+/**
+ * Use Mapped Types to Create an Object from a Union
+*/
+type RouteUnion = "/" | "/about" | "/admin" | "/admin/users";
+
+// type RoutesObject = {
+//     [index: string]: string
+// }
+// type RouteObject = Record<string, string>;
+
+type RoutesObject = {
+    [R in RouteUnion]: R
+}
+
+// Manually we add one by one
+// type RoutesObject = {
+//     [R in "/" | "wow"] : R
+// }
+
+type testsRoutesObject = [
+    Expect<
+        Equal<
+            RoutesObject,
+            {
+                "/": "/",
+                "/about": "/about",
+                "/admin": "/admin",
+                "/admin/users": "/admin/users"
+            }
+        >
+    >
+]
+
 const LoginPage = () => {
     return (
         <div
