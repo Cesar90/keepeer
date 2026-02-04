@@ -637,6 +637,34 @@ type testsRoutesObject = [
     >
 ]
 
+/**
+ * Mapped Types with Objects
+ * Map Over the keys of an Object
+*/
+
+interface Attributes {
+    firstName: string;
+    lastName: string;
+    age: number;
+}
+
+type AttributeGetters = {
+    [K in keyof Attributes]: () => Attributes[K];
+}
+
+type testsAttributeGetters = [
+    Expect<
+        Equal<
+            AttributeGetters,
+            {
+                firstName: () => string,
+                lastName: () => string,
+                age: () => number,
+            }
+        >
+    >
+]
+
 const LoginPage = () => {
     return (
         <div
